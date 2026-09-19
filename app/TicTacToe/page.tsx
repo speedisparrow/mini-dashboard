@@ -3,13 +3,14 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 import { useState } from "react";
-//Square function takes in value and onSquareClick from each button
+//Square is called by default return function and returns back buttons
+//with null values. Clicking a button passes values to square and updates the board
 function Square({ value, onSquareClick }) {
-  return (
-    <button className="square" onClick={onSquareClick}>
-      {value}
-    </button>
-  );
+    return (
+        <button className="square" onClick={onSquareClick}>
+        {value}
+        </button>
+    );
 }
 export default function Board() {
         //declare array of 9 w/ null values and xIsNext as true. Use state keeps it dynamic
@@ -30,7 +31,7 @@ export default function Board() {
         if (squares[i] || calculateWinner(squares)) {
         return;
         }
-        //duplicate array
+        //duplicate array to avoid mutation
         const nextSquares = squares.slice();
         if (xIsNext) {
         nextSquares[i] = "X";
