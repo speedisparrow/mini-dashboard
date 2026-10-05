@@ -6,42 +6,42 @@ import { useState } from "react";
 //Square is called by default return function and returns back buttons
 //with null values. Clicking a button passes values to square and updates the board
 function Square({ value, onSquareClick }) {
-    return (
-        <button className="square" onClick={onSquareClick}>
-        {value}
-        </button>
-    );
+  return (
+    <button className="square" onClick={onSquareClick}>
+      {value}
+    </button>
+  );
 }
 export default function Board() {
-        //declare array of 9 w/ null values and xIsNext as true. Use state keeps it dynamic
-        const [squares, setSquares] = useState(Array(9).fill(null));
-        const [xIsNext, setXISNext] = useState(true);
-        //set winner to what winner function finds
-        const winner = calculateWinner(squares);
-        //status bar
-        let status;
-        if (winner) {
-            status = "Winner: " + winner;
-        } else {
-            status = "Next player: " + (xIsNext ? "X" : "O");
-        }
-        //if square is full or if calculateWinner is truthy, return early
-    // i here just gets replaced with whatever value handleClick is passed
-    function handleClick(i) {
-        if (squares[i] || calculateWinner(squares)) {
-        return;
-        }
-        //duplicate array to avoid mutation
-        const nextSquares = squares.slice();
-        if (xIsNext) {
-        nextSquares[i] = "X";
-        } else {
-        nextSquares[i] = "O";
-        }
-        //every other turn xIsNext == true
-        setSquares(nextSquares);
-        setXISNext(!xIsNext);
-}
+  //declare array of 9 w/ null values and xIsNext as true. Use state keeps it dynamic
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [xIsNext, setXISNext] = useState(true);
+  //set winner to what winner function finds
+  const winner = calculateWinner(squares);
+  //status bar
+  let status;
+  if (winner) {
+    status = "Winner: " + winner;
+  } else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
+  }
+  //if square is full or if calculateWinner is truthy, return early
+  // i here just gets replaced with whatever value handleClick is passed
+  function handleClick(i) {
+    if (squares[i] || calculateWinner(squares)) {
+      return;
+    }
+    //duplicate array to avoid mutation
+    const nextSquares = squares.slice();
+    if (xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
+    //every other turn xIsNext == true
+    setSquares(nextSquares);
+    setXISNext(!xIsNext);
+  }
 
   return (
     <>
